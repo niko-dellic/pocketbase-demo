@@ -16,10 +16,16 @@ const record = await client.records.getOne("submissions", "5z039juwom7c685", {
   expand: "some_relation",
 });
 
-// get user location
-// navigator.geolocation.getCurrentPosition(function (position) {
-//   console.log(position.coords.latitude, position.coords.longitude);
+// create new record
+// const newRecord = await client.records.create("submissions", {
+//   discription: "Lorem ipsum 2",
+//   coordinates: [42.45, -70.5],
 // });
+
+// get user location
+navigator.geolocation.getCurrentPosition(function (position) {
+  console.log(position.coords.latitude, position.coords.longitude);
+});
 
 const deckgl = new deck.DeckGL({
   container: "map",
