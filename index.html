@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- 01 Mapbox dependencies -->
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+
+    <!-- 02 deck.gl dependencies -->
+    <script src="https://unpkg.com/deck.gl@^8.8.0/dist.min.js"></script>
+
+    <!-- 04 connection to style.css -->
+    <link rel="stylesheet" href="./style.css" />
+    <title>pocketbase</title>
+  </head>
+
+  <body>
+    <!-- map container that map.js points towards -->
+    <div id="map"></div>
+    <!-- 05 connection to map.js -->
+    <script type="module" src="./db.js"></script>
+  </body>
+</html>
