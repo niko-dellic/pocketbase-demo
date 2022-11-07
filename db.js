@@ -4,16 +4,6 @@ document.addEventListener("contextmenu", (event) => event.preventDefault()); //d
 
 const client = new PocketBase("http://127.0.0.1:8090");
 
-// const adminData = await client.admins.authViaEmail(
-//   "nikom@mit.edu",
-//   "@Letmein11"
-// );
-
-// console.log(client);
-// console.log(adminData);
-
-const collection = await client.collections.getOne("submissions");
-
 const records = await client.records.getFullList(
   "submissions",
   200 /* batch size */,
