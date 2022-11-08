@@ -12,10 +12,6 @@ const records = await client.records.getFullList(
   }
 );
 
-const record = await client.records.getOne("submissions", "5z039juwom7c685", {
-  expand: "some_relation",
-});
-
 // create new record
 // const newRecord = await client.records.create("submissions", {
 //   discription: "Lorem ipsum 2",
@@ -24,7 +20,7 @@ const record = await client.records.getOne("submissions", "5z039juwom7c685", {
 
 // get user location
 navigator.geolocation.getCurrentPosition(function (position) {
-  console.log(position.coords.latitude, position.coords.longitude);
+  // console.log(position.coords.latitude, position.coords.longitude);
 });
 
 const deckgl = new deck.DeckGL({
@@ -48,7 +44,6 @@ const deckgl = new deck.DeckGL({
       id: "form-submissions", // layer id
       data: records, // data formatted as array of objects
       getPosition: (d) => {
-        console.log(d.coordinates);
         return [d.coordinates[1], d.coordinates[0]];
       }, // accessor for position
       // Styles
@@ -75,22 +70,34 @@ const deckgl = new deck.DeckGL({
       //   },
     }),
   ],
-  // getTooltip: ({ object }) => {
-  //   if (object) {
-  //     return (
-  //       object && {
-  //         html: getImageGallery(
-  //           object.fileUpload,
-  //           object.describeWhat,
-  //           (preview = true)
-  //         ),
-  //         style: {
-  //           width: "fit-content",
-  //           backgroundColor: "transparent",
-  //           overflow: "hidden",
-  //         },
-  //       }
-  //     );
-  //   }
-  // },
+  getTooltip: ({ object }) => {
+    if (object) {
+      return (
+        object && {
+          html: getImage(object),
+          style: {
+            width: "fit-content",
+            backgroundColor: "transparent",
+            overflow: "hidden",
+          },
+        }
+      );
+    }
+  },
 });
+
+// getImage()
+function getImage(object) {
+  console.log(object);
+  if (object.media.length > 0) {
+    return `<img src="http://127.0.0.1:8090/api/files/vbpzuhpaxcpy4ur/${object.id}/${object.media[0]}" alt="test" />`;
+  } else {
+    return `<div>No Image</div>`;
+  }
+}
+
+const newImage = document.createElement("img");
+newImage.src =
+  "http://127.0.0.1:8090/api/files/vbpzuhpaxcpy4ur/5z039juwom7c685/cars_ecnbEyiOSG.jpg";
+newImage.id = "testImage";
+document.body.appendChild(newImage);
